@@ -55,7 +55,7 @@ dbc.Row([dbc.Col([ dcc.Graph(id='indicator',figure={})],xs=4, sm=4, md=4, lg=2, 
 )
 def update_graph(selected_country):
         filtered_df=df[df['Country']==selected_country]
-        fig1=go.FigureWidget()
+        fig1=go.Figure()
         fig1.add_scatter(name=f'Total Cases in {selected_country}',x=filtered_df['date'],y=filtered_df['total_cases'] ,fill='tonexty' ,fillcolor='rgba(225,6,0,0.2)' ,line=dict(color='#e10600'))
         fig1.update_layout(title=f'Up to Date Covid 19 Cases in {selected_country} : Cumulative Figures',xaxis=dict(showgrid=False),yaxis=dict(showgrid=False),hovermode='x unified',paper_bgcolor='#000000',
                         plot_bgcolor='#000000') 
@@ -68,7 +68,7 @@ def update_graph(selected_country):
 )
 def update_graph(selected_country):
         filtered_df=df[df['Country']==selected_country]
-        fig2=go.FigureWidget()
+        fig2=go.Figure()
         fig2.add_scatter(name=f'New  Cases in {selected_country}',x=filtered_df['date'],y=filtered_df['new_cases'] ,fill='tonexty' ,fillcolor='rgb(225,6,0)' ,line=dict(color='#e10600'))
         fig2.update_xaxes(rangeslider_visible=False,rangeselector= dict(buttons=list([dict(count=7,label='1w',step="day",stepmode="backward"),
                                                                                 dict(count=14,label='2w',step="day",stepmode="backward"),
@@ -93,7 +93,7 @@ def update_graph(selected_country):
 )
 def update_graph(selected_country):
         filtered_df=df[df['Country']==selected_country]
-        fig3=go.FigureWidget()
+        fig3=go.Figure()
         fig3.add_scatter(name=f'Mortality Rate in {selected_country}',x=filtered_df['date'],y=filtered_df['Mortality Rate'],fill='tonexty' ,fillcolor='rgba(225,6,0,0.2)' ,line=dict(color='#e10600'))
         fig3.add_scatter(name=f'Death Rate in {selected_country}',x=filtered_df['date'],y=filtered_df['Death Rate'],line=dict(color='#FFFF00') )
         fig3.update_layout(title=f'Death Rate vs Mortalitly Rate in {selected_country}',xaxis=dict(showgrid=False),yaxis=dict(showgrid=False),hovermode='x unified',paper_bgcolor='#000000',
@@ -138,7 +138,7 @@ def display_animated_graph(selection):
                 fig.update_layout(transition={'duration':1000},paper_bgcolor='#000000',geo=dict(bgcolor= '#000000'),margin=dict(l=0,r=0,t=0,b=0))
                 fig.update_traces(marker_line_color='rgba(255,255,255,0)', selector=dict(type='choroplethmapbox'))
                 fig.layout.template='plotly_dark'
-        else:
+        if selection=='Cumulative Cases':
                 df_country=df.groupby(['Countrycode','Country']).sum().reset_index()
                 yesterdays_date=df['date'].max()
                 fig = px.choropleth(df_country, locations="Countrycode", color = "total_cases",
