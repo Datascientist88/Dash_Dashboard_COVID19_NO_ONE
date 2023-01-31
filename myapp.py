@@ -37,7 +37,7 @@ app=dash.Dash(external_stylesheets=[dbc.themes.CYBORG],meta_tags=[{'name': 'view
                             'content': 'width=device-width, initial-scale=1.0'}])
 server=app.server
 app.layout=dbc.Container( [dbc.Row(dbc.Col(html.H2("COVID 19 DASHBOARD WITH REAL-TIME DATA ",className='text-center mb-4'),width=12)), dbc.Row( html.Marquee("Get Daily Updated News About Covid 19 From Bahgeel Dashboard"), style = {'color':'red'}),
-dbc.Row([dbc.Col([dbc.Card([dbc.CardImg(src="https://github.com/Datascientist88/Dash_Dashboard_COVID19_NO_ONE/blob/main/assets/covid19-cell.gif",top=True,bottom=False),
+dbc.Row([dbc.Col([dbc.Card([dbc.CardImg(src="https://media.tenor.com/NoO2NL5f5X8AAAAC/covid19-cell.gif",top=True,bottom=False),
 dbc.CardBody([html.H4('COVID 19 DASHBOARD',className='card-title'),html.P('Choose The Country:',className='card-text'),
 dcc.Dropdown(id='selection_drop',multi=False,value='World',
 options=[{'label':x,'value':x} for x in sorted(df['Country'].unique())],clearable=False,style={"color": "#000000"})])],color="dark",inverse=True,outline=False)],width=2,xs=12, sm=12, md=12, lg=5, xl=2) ,
