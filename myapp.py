@@ -35,6 +35,7 @@ def world_map(df):
 #setting the app layout ----I used bootstrap components to make the application resposive to various screeen sizes------------
 app=dash.Dash(external_stylesheets=[dbc.themes.CYBORG],meta_tags=[{'name': 'viewport',
                             'content': 'width=device-width, initial-scale=1.0'}])
+server=app.server
 app.layout=dbc.Container( [dbc.Row(dbc.Col(html.H2("COVID 19 DASHBOARD WITH REAL-TIME DATA ",className='text-center mb-4'),width=12)), dbc.Row( html.Marquee("Get Daily Updated News About Covid 19 From Bahgeel Dashboard"), style = {'color':'red'}),
 dbc.Row([dbc.Col([dbc.Card([dbc.CardImg(src="/assets/covid19-cell.gif",top=True,bottom=False),
 dbc.CardBody([html.H4('COVID 19 DASHBOARD',className='card-title'),html.P('Choose The Country:',className='card-text'),
