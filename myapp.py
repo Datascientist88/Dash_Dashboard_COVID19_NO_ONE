@@ -11,7 +11,7 @@ import requests
 
 # read in the data -------------I used URL to get automically updated data from the data source ---------------------
 url="https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/owid-covid-data.csv"
-df=pd.read_csv(url,low_memory=False)
+df=pd.read_csv(url)
 df=df.rename(columns={'iso_code':'Countrycode','location':'Country'})
 df['date']=pd.to_datetime(df['date'])
 df['Mortality Rate']=df['total_deaths']/df['total_cases']*100
