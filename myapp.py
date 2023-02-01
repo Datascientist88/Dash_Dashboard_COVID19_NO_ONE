@@ -129,30 +129,29 @@ def update_graph(selected_country):
     Input("selection", "value"))
 def display_animated_graph(selection):
         if selection=='Trajectory of Pandemic':
-       
+               
                 df_country=df.groupby(['Countrycode','Country','date']).sum().reset_index()
-                fig = px.choropleth(df_country, locations="Countrycode", color = "total_cases",
+                fig6 = px.choropleth(df_country, locations="Countrycode", color = "total_cases",
                                         hover_name= "Country",animation_frame=date,
                                         hover_data = df[['total_cases','new_cases','total_deaths']],
                                         color_continuous_scale=px.colors.sequential.Plasma)
 
-                fig.update_layout(transition={'duration':1000},paper_bgcolor='#000000',geo=dict(bgcolor= '#000000'),margin=dict(l=0,r=0,t=0,b=0))
-                fig.update_traces(marker_line_color='rgba(255,255,255,0)', selector=dict(type='choroplethmapbox'))
-                fig.layout.template='plotly_dark'
-     
-                
-        else:
-            
+                fig6.update_layout(transition={'duration':1000},paper_bgcolor='#000000',geo=dict(bgcolor= '#000000'),margin=dict(l=0,r=0,t=0,b=0))
+                fig6.update_traces(marker_line_color='rgba(255,255,255,0)', selector=dict(type='choroplethmapbox'))
+                fig6.layout.template='plotly_dark'
+                fig=fig6
+        if selection=='Cumulative Cases':
                 df_country=df.groupby(['Countrycode','Country']).sum().reset_index()
                 yesterdays_date=df['date'].max()
-                fig = px.choropleth(df_country, locations="Countrycode", color = "total_cases",
+                fig7 = px.choropleth(df_country, locations="Countrycode", color = "total_cases",
                                         hover_name= "Country",
                                         hover_data = ['total_cases','new_cases','total_deaths'],
                                         projection="orthographic",
                                         color_continuous_scale=px.colors.sequential.OrRd_r)
-                fig.update_layout(paper_bgcolor='#000000',geo=dict(bgcolor= '#000000'),
+                fig7.update_layout(paper_bgcolor='#000000',geo=dict(bgcolor= '#000000'),
                                 title=f"Cumulative Cases since the start of pandemic untill {yesterdays_date}")
-                fig.layout.template='plotly_dark'
+                fig7.layout.template='plotly_dark'
+                fig7=fig
 
         return fig
        
