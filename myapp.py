@@ -20,20 +20,27 @@ df_country=df.groupby(['Countrycode','Country']).sum().reset_index()
 yesterdays_date=df['date'].max()
 df['date']=pd.to_datetime(df['date'], format='%Y-%m-%d')
 date=df['date'].dt.strftime('%Y-%m-%d')
-# plot the Map :--------- this part is redundant ------------------
-def world_map(df):
-    fig = px.choropleth(df, locations="Countrycode", color = "total_cases",
-                        hover_name= "Country",
-                        hover_data = ['total_cases','new_cases','total_deaths'],
-                        projection="orthographic",
-                        color_continuous_scale=px.colors.sequential.OrRd_r)
+# plot the Maps :--------- this part of the code transfered here to reduce the load on the call back function ------------------
+df_country=df.groupby(['Countrycode','Country','date']).sum().reset_index()
+fig6 = px.choropleth(df_country, locations="Countrycode", color = "total_cases",
+                                        hover_name= "Country",animation_frame=date,
+                                        hover_data = df[['total_cases','new_cases','total_deaths']],
+                                        color_continuous_scale=px.colors.sequential.Plasma)
 
-    fig.update_layout(paper_bgcolor='#000000',geo=dict(bgcolor= '#000000'),
-                       title=f"Cumulative Cases since the start of pandemic untill {yesterdays_date}")
-    fig.layout.template='plotly_dark'
-
-    return fig
-
+fig6.update_layout(transition={'duration':1000},paper_bgcolor='#000000',geo=dict(bgcolor= '#000000'),margin=dict(l=0,r=0,t=0,b=0))
+fig6.update_traces(marker_line_color='rgba(255,255,255,0)', selector=dict(type='choroplethmapbox'))
+fig6.layout.template='plotly_dark'
+# plot the second map :
+df_country=df.groupby(['Countrycode','Country']).sum().reset_index()
+yesterdays_date=df['date'].max()
+fig7 = px.choropleth(df_country, locations="Countrycode", color = "total_cases",
+                                        hover_name= "Country",
+                                        hover_data = ['total_cases','new_cases','total_deaths'],
+                                        projection="orthographic",
+                                        color_continuous_scale=px.colors.sequential.OrRd_r)
+fig7.update_layout(paper_bgcolor='#000000',geo=dict(bgcolor= '#000000'),
+                                title=f"Cumulative Cases since the start of pandemic untill {yesterdays_date}")
+fig7.layout.template='plotly_dark'
 #setting the app layout ----I used bootstrap components to make the application resposive to various screeen sizes------------
 app=dash.Dash(external_stylesheets=[dbc.themes.CYBORG],meta_tags=[{'name': 'viewport',
                             'content': 'width=device-width, initial-scale=1.0'}])
@@ -128,33 +135,10 @@ def update_graph(selected_country):
     Output("graph", "figure"), 
     Input("selection", "value"))
 def display_animated_graph(selection):
-        if selection=='Trajectory of Pandemic':
-               
-                df_country=df.groupby(['Countrycode','Country','date']).sum().reset_index()
-                fig6 = px.choropleth(df_country, locations="Countrycode", color = "total_cases",
-                                        hover_name= "Country",animation_frame=date,
-                                        hover_data = df[['total_cases','new_cases','total_deaths']],
-                                        color_continuous_scale=px.colors.sequential.Plasma)
-
-                fig6.update_layout(transition={'duration':1000},paper_bgcolor='#000000',geo=dict(bgcolor= '#000000'),margin=dict(l=0,r=0,t=0,b=0))
-                fig6.update_traces(marker_line_color='rgba(255,255,255,0)', selector=dict(type='choroplethmapbox'))
-                fig6.layout.template='plotly_dark'
-                fig=fig6
-        if selection=='Cumulative Cases':
-                df_country=df.groupby(['Countrycode','Country']).sum().reset_index()
-                yesterdays_date=df['date'].max()
-                fig7 = px.choropleth(df_country, locations="Countrycode", color = "total_cases",
-                                        hover_name= "Country",
-                                        hover_data = ['total_cases','new_cases','total_deaths'],
-                                        projection="orthographic",
-                                        color_continuous_scale=px.colors.sequential.OrRd_r)
-                fig7.update_layout(paper_bgcolor='#000000',geo=dict(bgcolor= '#000000'),
-                                title=f"Cumulative Cases since the start of pandemic untill {yesterdays_date}")
-                fig7.layout.template='plotly_dark'
-                fig7=fig
-
-        return fig
-       
+         animations={'Trajectory of Pandemic':fig6,
+         'Cumulative Cases':fig7}
+        
+         return animations
 if __name__=='__main__':
     app.run_server(debug=True, port=8000)
     
