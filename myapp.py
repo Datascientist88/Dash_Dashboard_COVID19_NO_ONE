@@ -18,6 +18,8 @@ df['Mortality Rate']=df['total_deaths']/df['total_cases']*100
 df['Death Rate']=df['total_deaths']/df['population']*100
 df_country=df.groupby(['Countrycode','Country']).sum().reset_index()
 yesterdays_date=df['date'].max()
+df['date']=pd.to_datetime(df['date'], format='%Y-%m-%d')
+date=df['date'].dt.strftime('%Y-%m-%d')
 # plot the Map :--------- this part is redundant ------------------
 def world_map(df):
     fig = px.choropleth(df, locations="Countrycode", color = "total_cases",
@@ -127,8 +129,7 @@ def update_graph(selected_country):
     Input("selection", "value"))
 def display_animated_graph(selection):
         if selection=='Trajectory of Pandemic':
-                df['date']=pd.to_datetime(df['date'], format='%Y-%m-%d')
-                date=df['date'].dt.strftime('%Y-%m-%d')
+       
                 df_country=df.groupby(['Countrycode','Country','date']).sum().reset_index()
                 fig = px.choropleth(df_country, locations="Countrycode", color = "total_cases",
                                         hover_name= "Country",animation_frame=date,
