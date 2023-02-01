@@ -138,7 +138,7 @@ def display_animated_graph(selection):
                 fig.update_layout(transition={'duration':1000},paper_bgcolor='#000000',geo=dict(bgcolor= '#000000'),margin=dict(l=0,r=0,t=0,b=0))
                 fig.update_traces(marker_line_color='rgba(255,255,255,0)', selector=dict(type='choroplethmapbox'))
                 fig.layout.template='plotly_dark'
-        else:
+        elif selection=='Cumulative Cases':
                 df_country=df.groupby(['Countrycode','Country']).sum().reset_index()
                 yesterdays_date=df['date'].max()
                 fig = px.choropleth(df_country, locations="Countrycode", color = "total_cases",
