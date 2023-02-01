@@ -46,7 +46,7 @@ dbc.Col([ dcc.Graph(id='cumulative_fig',figure={})],xs=12, sm=12, md=12, lg=5, x
          ]),
          html.Br(),
 dbc.Row([dbc.Col([ dcc.Graph(id='indicator',figure={})],xs=4, sm=4, md=4, lg=2, xl=2),dbc.Col([dcc.Graph(id='mortality',figure={})], 
-        xs=12, sm=12, md=12, lg=5, xl=5) ,dbc.Col([ dcc.RadioItems(id='selection',options=['Trajectory of Pandemic','Cumulative Cases'],value='Cumulative Cases') ,dcc.Loading(dcc.Graph(id='graph',figure=fig),type='cube')],xs=12, sm=12, md=12, lg=5, xl=5)]),
+        xs=12, sm=12, md=12, lg=5, xl=5) ,dbc.Col([ dcc.RadioItems(id='selection',options=['Trajectory of Pandemic','Cumulative Cases'],value='Cumulative Cases') ,dcc.Loading(dcc.Graph(id='graph',figure={}),type='cube')],xs=12, sm=12, md=12, lg=5, xl=5)]),
 ],fluid=True)
 # the call back Functions :---------------------- necessary to add interactivity to your dashboard -------------
 @app.callback(
@@ -151,7 +151,6 @@ def display_animated_graph(selection):
                 fig.layout.template='plotly_dark'
 
         return fig
-        
        
 if __name__=='__main__':
     app.run_server(debug=True, port=8000)
