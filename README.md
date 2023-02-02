@@ -1,7 +1,6 @@
 # Dash_Dashboard_COVID19_NO_ONE
 [click here to view live covid 19 Dashboard](https://bahageel-corona-covid19-dashboard.onrender.com/)
-<p><img align="center" alt="gif" src="https://user-images.githubusercontent.com/119727641/216033395-cf554149-a704-4836-b4cb-55728447cd06.gif" width="1800" height="500" /></p>
-
+<p><img align="center" alt="gif" src="https://user-images.githubusercontent.com/119727641/216243689-3959c8ed-83e6-470d-baa7-8da5f159decf.gif" width="1800" height="500" /></p>
 DATA VISUALIZATION WITH PLOTLY & DASH  
 Covid 19 Real-time Dashboard project  
 Introduction: 
