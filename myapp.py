@@ -70,8 +70,8 @@ def update_graph(selected_country):
                                                                                 dict(count=14,label='2w',step="day",stepmode="backward"),
                                                                                 dict(count=1,label='1m',step="month",stepmode="backward"),
                                                                                 dict(count=6,label='6m',step="month",stepmode="backward"),
-                                                                                dict(count=12,label='12m',step="month",stepmode="backward"),
-                                                                                dict(count=1,label='YTD',step="year",stepmode="todate"),
+                                                                                dict(count=12,label='1y',step="month",stepmode="backward"),
+                                                                    
                                                                                 dict(label="All",step="all")
                                                                                 ]),activecolor='tomato')
                         )
