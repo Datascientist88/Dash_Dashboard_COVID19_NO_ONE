@@ -119,7 +119,6 @@ def update_graph(selected_country):
         fig5.layout.template='plotly_dark'
         return fig5
 @app.callback(
-    @app.callback(
     Output("graph", "figure"), 
     Input("selection", "value"))
 def display_animated_graph(selection):
