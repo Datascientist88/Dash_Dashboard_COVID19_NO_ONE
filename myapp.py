@@ -16,7 +16,7 @@ df=df.rename(columns={'iso_code':'Countrycode','location':'Country'})
 df['date']=pd.to_datetime(df['date'])
 df['Mortality Rate']=df['total_deaths']/df['total_cases']*100
 df['Death Rate']=df['total_deaths']/df['population']*100
-df_country2=df.groupby(['Countrycode','Country']).sum().reset_index()
+df_country2=df.groupby(['Countrycode','Country']).cumsum().reset_index()
 yesterdays_date=df['date'].max()
 df['date']=pd.to_datetime(df['date'], format='%Y-%m-%d')
 date=df['date'].dt.strftime('%Y-%m-%d')
