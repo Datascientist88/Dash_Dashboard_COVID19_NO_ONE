@@ -11,7 +11,7 @@ import requests
 
 # read in the data -------------I used URL to get automically updated data from the data source ---------------------
 url="https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/owid-covid-data.csv"
-df=pd.read_csv(url,error_bad_lines = False)
+df=pd.read_csv(url,error_bad_lines = False,low_memory = False)
 df=df.rename(columns={'iso_code':'Countrycode','location':'Country'})
 df.dropna(subset=['Country','total_cases', 'new_cases','total_deaths','new_deaths','new_deaths_smoothed'],inplace=True)
 df['date']=pd.to_datetime(df['date'])
